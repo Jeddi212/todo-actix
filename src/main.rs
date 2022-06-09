@@ -3,7 +3,7 @@ mod models;
 
 use crate::models::Status;
 use actix_web::{HttpServer, App, web, Responder, HttpResponse};
-use std::io;aa69976b5eb0bc59a3de44d4bc67fdbe9d3ff84a
+use std::io;
 use dotenv::dotenv;
 
 async fn status() -> impl Responder {
