@@ -9,6 +9,9 @@ edition = "2021"
 actix-rt = "2.7.0"
 actix-web = "4.0.1"
 serde = { version = "1.0.137", features = ["derive"] }
+serde_json = "1.0.81"
+diesel = { version = "1.4.8", features = ["postgres"] }
+dotenv = "0.15.0"
 tokio-pg-mapper = "0.2.0"
 tokio-pg-mapper-derive = "0.2.0"
 deadpool-postgres = "0.10.2"
