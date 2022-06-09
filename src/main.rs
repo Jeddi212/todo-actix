@@ -43,6 +43,7 @@ async fn main() -> io::Result<()> {
             .service(get_todo_by_id)
             .service(post_todo)
             .service(put_todo)
+            .service(delete_todo)
 
     })
     .bind(format!("{}:{}", HOST, PORT))?

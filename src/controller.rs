@@ -42,7 +42,9 @@ pub async fn put_todo(id: web::Path<i32>, update_dto: web::Json<PutTodoDTO>) -> 
 
 #[delete("/todo/{id}")]
 pub async fn delete_todo(id: web::Path<i32>) -> Result<String> {
-    Ok(format!("Your id is {}!", id))
+    Ok(format!("Succes delete {} record!", 
+        delete(id.into_inner())
+    ))
 }
 
 #[derive(Serialize, Deserialize)]

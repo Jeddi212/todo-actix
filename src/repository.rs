@@ -52,3 +52,11 @@ pub fn update(target_id: i32, new_title: &String) -> TodoList {
         .get_result(&conn)
         .expect("Error updating Todos")
 }
+
+pub fn delete(target_id: i32) -> usize {
+    use crate::schema::todos:: dsl::*;
+
+    let conn = establish_connection();
+
+    diesel::delete(todos.filter(id.eq(target_id))).execute(&conn).expect("Error deleting")
+}
