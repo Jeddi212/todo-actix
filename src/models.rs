@@ -1,5 +1,6 @@
 use serde::{Serialize, Deserialize};
 use tokio_pg_mapper_derive::PostgresMapper;
+use diesel::Queryable;
 
 #[derive(Serialize)]
 pub struct Status {
@@ -8,6 +9,7 @@ pub struct Status {
 
 #[derive(Serialize, Deserialize, PostgresMapper)]
 #[pg_mapper(table="todo_list")]
+#[derive(Queryable)]
 pub struct TodoList {
     pub id: i32,
     pub title: String

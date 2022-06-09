@@ -1,6 +1,8 @@
-use crate::models::*;
 use actix_web::{get, post, put, web, HttpResponse, Responder, Result};
 use serde::{self, Serialize, Deserialize};
+
+use crate::models::*;
+use crate::repository::*;
 
 #[get("/")]
 pub async fn status() -> impl Responder {
@@ -16,19 +18,13 @@ pub async fn status() -> impl Responder {
 pub async fn get_todo() -> impl Responder {
     HttpResponse::Ok()
         .json(
-            TodoList {
-                id: 1,
-                title: "Todo List 1".to_string()
-            }
+            find_all()
         )
 }
 
 #[post("/todo")]
-pub async fn post_todo(info: web::Json<Info>) -> Result<impl Responder> {
-    let i = Info {
-        username: info.username.to_string()
-    };
-    Ok(web::Json(i))
+pub async fn post_todo(info: web::Json<TodoList>) -> Result<impl Responder> {
+    Ok(info)
 }
 
 #[put("/todo/{id}")]
