@@ -8,6 +8,7 @@ pub fn find_all() -> Vec<TodoList> {
     let connection = establish_connection();
     let results = todos
         .limit(50)
+        .order(id.asc())
         .load::<TodoList>(&connection)
         .expect("Error loading posts");
 
