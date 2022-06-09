@@ -40,6 +40,7 @@ async fn main() -> io::Result<()> {
         App::new()
             .service(status)
             .service(get_todo)
+            .service(get_todo_by_id)
             .service(post_todo)
             .service(put_todo)
 

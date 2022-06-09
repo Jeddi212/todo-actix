@@ -20,6 +20,13 @@ pub fn find_all() -> Vec<TodoList> {
     vec_todos
 }
 
+pub fn find(target_id: i32) -> TodoList {
+    use crate::schema::todos:: dsl::*;  
+
+    let connection = establish_connection();
+    todos.find(target_id).get_result(&connection).expect("Todos not found")
+}
+
 pub fn save(title: &String) -> TodoList {
     use crate::schema::todos;
 
@@ -35,10 +42,8 @@ pub fn save(title: &String) -> TodoList {
         .expect("Error saving new todo")
 }
 
-pub fn update(target_id: String, new_title: &String) -> TodoList {
+pub fn update(target_id: i32, new_title: &String) -> TodoList {
     use crate::schema::todos:: dsl::*;
-
-    let target_id: i32 = target_id.trim().parse::<i32>().expect("ID not valid");
 
     let conn = establish_connection();
 
