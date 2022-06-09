@@ -1,3 +1,5 @@
+mod models;
+
 use actix_web::{HttpServer, App, web, Responder};
 use std::io;
 
