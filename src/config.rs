@@ -33,8 +33,8 @@ pub struct Config {
 
 impl Config {
     pub fn from_env() -> Self {
-        let host_env = dotenv!("SERVER.HOST");
-        let port_env = dotenv!("SERVER.PORT");
+        let host_env = dotenv!("SERVER_HOST");
+        let port_env = dotenv!("SERVER_PORT");
         Self {
             server: ServerConfig {
                 host: host_env.to_string(),
