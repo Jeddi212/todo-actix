@@ -23,8 +23,10 @@ pub async fn get_todo() -> impl Responder {
 }
 
 #[post("/todo")]
-pub async fn post_todo(info: web::Json<TodoList>) -> Result<impl Responder> {
-    Ok(info)
+pub async fn post_todo(create_dto: web::Json<CreateTodo>) -> Result<impl Responder>{
+    let todo = save(&create_dto.title);
+    let res = serde_json::to_string(&todo)?;
+    Ok(res)
 }
 
 #[put("/todo/{id}")]
