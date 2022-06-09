@@ -28,18 +28,22 @@ pub struct ServerConfig {
 }
 
 pub struct Config {
-    pub server: ServerConfig
+    pub server: ServerConfig,
+    pub pg: deadpool_postgres::Config
 }
 
 impl Config {
-    pub fn from_env() -> Self {
+    pub fn from_env(&mut self) -> &mut Config{
         let host_env = dotenv!("SERVER_HOST");
         let port_env = dotenv!("SERVER_PORT");
-        Self {
-            server: ServerConfig {
-                host: host_env.to_string(),
-                port: port_env.to_string()
-            }
+        self.set_server(host_env.to_string(), port_env.to_string());
+        self
+    }
+
+    pub fn set_server(&mut self, host_env: String, port_env: String) {
+        self.server = ServerConfig {
+            host: host_env,
+            port: port_env
         }
     }
 }

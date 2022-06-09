@@ -1,33 +1,30 @@
 mod config;
+mod handlers;
 mod models;
 
-use crate::models::Status;
-use actix_web::{HttpServer, App, web, Responder, HttpResponse};
+use actix_web::{HttpServer, App, web};
 use std::io;
 use dotenv::dotenv;
-
-async fn status() -> impl Responder {
-    HttpResponse::Ok()
-        .json(
-            Status { 
-                status: "UP".to_string()
-            }
-        )
-}
+use tokio_postgres::NoTls;
+use deadpool_postgres::Runtime;
+use crate::handlers::*;
 
 #[actix_rt::main]
 async fn main() -> io::Result<()> {
 
     dotenv().ok();
 
-    // let config = crate::config::Config::from_env().unwrap();
-    let config = crate::config::Config::from_env();
+    let mut config: config::Config;
+    let config = crate::config::Config::from_env(&mut config);
+
+    let pool = config.pg.create_pool(Some(Runtime::Tokio1), NoTls).unwrap();
 
     println!("\nStarting server at {}:{}", config.server.host, config.server.port);
 
-    HttpServer::new(|| {
+    HttpServer::new(move | | {
 
         App::new()
+            .app_data(pool.clone())
             .route("/", web::get().to(status))
 
     })
