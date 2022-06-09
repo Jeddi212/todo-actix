@@ -20,7 +20,7 @@ pub struct TodoList {
 #[pg_mapper(table="todo_list")]
 #[derive(Insertable)]
 #[table_name="todos"]
-pub struct CreateTodo {
+pub struct PutTodoDTO {
     pub title: String
 }
 
