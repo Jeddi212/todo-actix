@@ -20,7 +20,8 @@ async fn main() -> io::Result<()> {
 
     dotenv().ok();
 
-    let config = crate::config::Config::from_env().unwrap();
+    // let config = crate::config::Config::from_env().unwrap();
+    let config = crate::config::Config::from_env();
 
     println!("\nStarting server at {}:{}", config.server.host, config.server.port);
 
