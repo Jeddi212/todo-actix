@@ -1,34 +1,38 @@
-mod config;
-mod handlers;
+// mod config;
+mod controller;
 mod models;
 
-use actix_web::{HttpServer, App, web};
+use actix_web::{HttpServer, App};
 use std::io;
-use dotenv::dotenv;
-use tokio_postgres::NoTls;
-use deadpool_postgres::Runtime;
-use crate::handlers::*;
+// use dotenv::dotenv;
+// use tokio_postgres::NoTls;
+// use deadpool_postgres::Runtime;
+use crate::controller::*;
 
 #[actix_rt::main]
 async fn main() -> io::Result<()> {
 
-    dotenv().ok();
+    // dotenv().ok();
 
-    let mut config: config::Config;
-    let config = crate::config::Config::from_env(&mut config);
+    // let mut config: config::Config;
+    // let config = crate::config::Config::from_env(&mut config);
 
-    let pool = config.pg.create_pool(Some(Runtime::Tokio1), NoTls).unwrap();
+    // let pool = config.pg.create_pool(Some(Runtime::Tokio1), NoTls).unwrap();
 
-    println!("\nStarting server at {}:{}", config.server.host, config.server.port);
+    static HOST: &str = "127.0.0.1";
+    static PORT: &str = "7000";
+
+    println!("\nStarting server at {}:{}", HOST, PORT);
 
     HttpServer::new(move | | {
 
         App::new()
-            .app_data(pool.clone())
-            .route("/", web::get().to(status))
+            .service(status)
+            .service(get_todo)
+            .service(get_todos)
 
     })
-    .bind(format!("{}:{}", config.server.host, config.server.port))?
+    .bind(format!("{}:{}", HOST, PORT))?
     .run()
     .await
 }
