@@ -1,8 +1,7 @@
 use actix_web::{get, post, put, delete, web, HttpResponse, Responder, Result};
-use serde::{self, Serialize, Deserialize};
 
-use crate::models::*;
-use crate::repository::*;
+use super::super::model::todo_model::*;
+use crate::modules::todos::repository::todo_repository::*;
 
 #[get("/")]
 pub async fn status() -> impl Responder {
@@ -45,15 +44,4 @@ pub async fn delete_todo(id: web::Path<i32>) -> Result<String> {
     Ok(format!("Succes delete {} record!", 
         delete(id.into_inner())
     ))
-}
-
-#[derive(Serialize, Deserialize)]
-pub struct Info {
-    username: String,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Params {
-    name: String,
-    color: String,
 }

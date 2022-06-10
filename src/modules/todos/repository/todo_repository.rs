@@ -1,6 +1,6 @@
-use crate::*;
-use crate::models::*;
-use self::diesel::prelude::*;
+use super::super::model::todo_model::*;
+use crate::db::db_connection::establish_connection;
+use crate::diesel::prelude::*;
 
 pub fn find_all() -> Vec<TodoList> {
     use crate::schema::todos:: dsl::*;
