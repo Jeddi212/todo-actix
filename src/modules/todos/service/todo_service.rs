@@ -14,3 +14,7 @@ pub fn update(target_id: i32, dto: PutTodoDTO) -> TodoList {
         title: dto.title
     })
 }
+
+pub fn remove_one(target_id: i32) -> usize {
+    todo_repository::delete(target_id)
+}
