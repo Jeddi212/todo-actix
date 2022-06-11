@@ -1,7 +1,9 @@
 use actix_web::{get, post, put, delete, web, HttpResponse, Responder, Result};
 
 use super::super::model::todo_model::*;
+use super::super::dto::todo_dto::*;
 use crate::modules::todos::repository::todo_repository::*;
+use crate::modules::todos::service::todo_service;
 
 #[get("/")]
 pub async fn status() -> impl Responder {
@@ -31,7 +33,7 @@ pub async fn get_todo_by_id(id: web::Path<i32>) -> impl Responder {
 
 #[post("")]
 pub async fn post_todo(create_dto: web::Json<PutTodoDTO>) -> Result<impl Responder>{
-    Ok(serde_json::to_string(&save(&create_dto.title))?)
+    Ok(serde_json::to_string(&todo_service::save(create_dto.into_inner()))?)
 }
 
 #[put("{id}")]

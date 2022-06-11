@@ -27,17 +27,13 @@ pub fn find(target_id: i32) -> TodoList {
     todos.find(target_id).get_result(&connection).expect("Todos not found")
 }
 
-pub fn save(title: &String) -> TodoList {
+pub fn save(todo: PutTodo) -> TodoList {
     use crate::schema::todos;
 
     let conn = establish_connection();
 
-    let new_todo = PutTodoDTO {
-        title: title.to_string()
-    };
-
     diesel::insert_into(todos::table)
-        .values(&new_todo)
+        .values(&todo)
         .get_result(&conn)
         .expect("Error saving new todo")
 }

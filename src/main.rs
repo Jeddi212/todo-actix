@@ -6,7 +6,7 @@ mod schema;
 use actix_web::{HttpServer, App};
 use std::io;
 
-use crate::modules::todos::controller::todo_controller::*;
+use crate::modules::todos::controller::todo_controller::status;
 use config::*;
 
 #[macro_use]
