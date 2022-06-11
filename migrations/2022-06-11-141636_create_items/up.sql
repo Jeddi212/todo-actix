@@ -1,6 +1,9 @@
 CREATE TABLE items (
     id SERIAL PRIMARY KEY,
     title VARCHAR NOT NULL,
-    checked BOOLEAN DEFAULT FALSE,
-    list_id int4
-)
+    checked BOOLEAN DEFAULT FALSE NOT NULL,
+    list_id INT4 NOT NULL
+);
+
+ALTER TABLE items
+ADD FOREIGN KEY (list_id) REFERENCES todos (id);
