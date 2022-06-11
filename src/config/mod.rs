@@ -12,3 +12,7 @@ pub fn todo_config(cfg: &mut web::ServiceConfig) {
                     .service(delete_todo)
     );
 }
+
+pub fn item_config(cfg: &mut web::ServiceConfig) {
+    // TODO add cfg.service()
+}
