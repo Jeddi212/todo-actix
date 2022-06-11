@@ -13,7 +13,7 @@ pub async fn status() -> impl Responder {
         )
 }
 
-#[get("/todo")]
+#[get("")]
 pub async fn get_todo() -> impl Responder {
     HttpResponse::Ok()
         .json(
@@ -21,7 +21,7 @@ pub async fn get_todo() -> impl Responder {
         )
 }
 
-#[get("/todo/{id}")]
+#[get("{id}")]
 pub async fn get_todo_by_id(id: web::Path<i32>) -> impl Responder {
     HttpResponse::Ok()
         .json(
@@ -29,17 +29,17 @@ pub async fn get_todo_by_id(id: web::Path<i32>) -> impl Responder {
         )
 }
 
-#[post("/todo")]
+#[post("")]
 pub async fn post_todo(create_dto: web::Json<PutTodoDTO>) -> Result<impl Responder>{
     Ok(serde_json::to_string(&save(&create_dto.title))?)
 }
 
-#[put("/todo/{id}")]
+#[put("{id}")]
 pub async fn put_todo(id: web::Path<i32>, update_dto: web::Json<PutTodoDTO>) -> Result<String> {
     Ok(serde_json::to_string(&update(id.into_inner(), &update_dto.title))?)
 }
 
-#[delete("/todo/{id}")]
+#[delete("{id}")]
 pub async fn delete_todo(id: web::Path<i32>) -> Result<String> {
     Ok(format!("Succes delete {} record!", 
         delete(id.into_inner())

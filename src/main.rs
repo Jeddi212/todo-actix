@@ -1,12 +1,13 @@
+mod config;
+mod db;
 mod modules;
 mod schema;
-mod db;
 
 use actix_web::{HttpServer, App};
 use std::io;
 
-// use crate::controller::*;
 use crate::modules::todos::controller::todo_controller::*;
+use config::todo_config;
 
 #[macro_use]
 extern crate diesel;
@@ -23,15 +24,14 @@ async fn main() -> io::Result<()> {
     HttpServer::new(move | | {
 
         App::new()
+            .configure(todo_config)
             .service(status)
-            .service(get_todo)
-            .service(get_todo_by_id)
-            .service(post_todo)
-            .service(put_todo)
-            .service(delete_todo)
+
+            // .service(factory)            
 
     })
     .bind(format!("{}:{}", HOST, PORT))?
     .run()
     .await
 }
+
