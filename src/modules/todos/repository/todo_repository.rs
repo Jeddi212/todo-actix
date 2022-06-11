@@ -30,13 +30,13 @@ pub fn save(todo: PutTodo) -> TodoList {
         .expect("Error saving new todo")
 }
 
-pub fn update(target_id: i32, new_title: &String) -> TodoList {
+pub fn update(todo: TodoList) -> TodoList {
     use crate::schema::todos:: dsl::*;
 
     let conn = establish_connection();
 
-    diesel::update(todos.filter(id.eq(target_id)))
-        .set(title.eq(new_title))
+    diesel::update(todos.find(todo.id))
+        .set(&todo)
         .get_result(&conn)
         .expect("Error updating Todos")
 }

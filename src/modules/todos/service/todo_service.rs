@@ -7,3 +7,10 @@ use super::super::repository::todo_repository;
 pub fn save(dto: PutTodoDTO) -> TodoList {
     todo_repository::save(PutTodo::from(dto))
 }
+
+pub fn update(target_id: i32, dto: PutTodoDTO) -> TodoList {
+    todo_repository::update(TodoList {
+        id: target_id,
+        title: dto.title
+    })
+}

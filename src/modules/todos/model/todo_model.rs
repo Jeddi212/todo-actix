@@ -11,6 +11,7 @@ pub struct Status {
 
 #[derive(Serialize, Deserialize)]
 #[derive(Queryable, Insertable)]
+#[derive(AsChangeset)]
 #[table_name="todos"]
 pub struct TodoList {
     pub id: i32,

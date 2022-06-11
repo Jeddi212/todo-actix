@@ -38,7 +38,10 @@ pub async fn post_todo(create_dto: web::Json<PutTodoDTO>) -> Result<impl Respond
 
 #[put("{id}")]
 pub async fn put_todo(id: web::Path<i32>, update_dto: web::Json<PutTodoDTO>) -> Result<String> {
-    Ok(serde_json::to_string(&update(id.into_inner(), &update_dto.title))?)
+    Ok(serde_json::to_string(&todo_service::update(
+        id.into_inner(), 
+        update_dto.into_inner()
+    ))?)
 }
 
 #[delete("{id}")]
