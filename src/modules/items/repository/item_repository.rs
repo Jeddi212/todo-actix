@@ -6,13 +6,10 @@ pub fn find_all() -> Vec<Items> {
     use crate::schema::items:: dsl::*;
 
     let connection = establish_connection();
-    let results = items
-        .limit(50)
+    items.limit(50)
         .order(id.asc())
         .load::<Items>(&connection)
-        .expect("Error loading items");
-
-    results
+        .expect("Error loading items")
 }
 
 // pub fn save() -> Vec<Items> {

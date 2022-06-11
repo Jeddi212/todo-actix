@@ -6,18 +6,10 @@ pub fn find_all() -> Vec<TodoList> {
     use crate::schema::todos:: dsl::*;
 
     let connection = establish_connection();
-    let results = todos
-        .limit(50)
+    todos.limit(50)
         .order(id.asc())
         .load::<TodoList>(&connection)
-        .expect("Error loading posts");
-
-    let mut vec_todos: Vec<TodoList> = Vec::new();
-    for todo in results {
-        vec_todos.push(todo);
-    }
-
-    vec_todos
+        .expect("Error loading posts")
 }
 
 pub fn find(target_id: i32) -> TodoList {
