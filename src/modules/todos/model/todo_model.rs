@@ -1,6 +1,6 @@
 use serde::{Serialize, Deserialize};
 use diesel::Queryable;
-use crate::schema::*;
+use crate::schema::todos;
 
 #[derive(Serialize)]
 pub struct Status {

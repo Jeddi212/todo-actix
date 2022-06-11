@@ -3,6 +3,7 @@ use diesel::Queryable;
 use crate::schema::*;
 
 #[derive(Serialize, Deserialize)]
+#[derive(Queryable)]
 pub struct Items {
     pub id: i32,
     pub title: String,

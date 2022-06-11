@@ -1,6 +1,7 @@
 use actix_web::{web};
 
 use crate::modules::todos::controller::todo_controller::*;
+use crate::modules::items::controller::item_controller::*;
 
 pub fn todo_config(cfg: &mut web::ServiceConfig) {
     cfg.service(
@@ -14,5 +15,8 @@ pub fn todo_config(cfg: &mut web::ServiceConfig) {
 }
 
 pub fn item_config(cfg: &mut web::ServiceConfig) {
-    // TODO add cfg.service()
+    cfg.service(
+        web::scope("/item")
+                .service(get_item)
+    );
 }

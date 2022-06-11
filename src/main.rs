@@ -7,7 +7,7 @@ use actix_web::{HttpServer, App};
 use std::io;
 
 use crate::modules::todos::controller::todo_controller::*;
-use config::todo_config;
+use config::*;
 
 #[macro_use]
 extern crate diesel;
@@ -25,6 +25,7 @@ async fn main() -> io::Result<()> {
 
         App::new()
             .configure(todo_config)
+            .configure(item_config)
             .service(status)
 
             // .service(factory)            
