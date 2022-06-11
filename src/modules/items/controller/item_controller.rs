@@ -1,4 +1,4 @@
-use actix_web::{get, post, put, delete, web, HttpResponse, Responder, Result};
+use actix_web::{get, HttpResponse, Responder, Result};
 
 use super::super::service::item_service;
 
