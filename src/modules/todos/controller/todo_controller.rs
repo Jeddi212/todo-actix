@@ -47,6 +47,6 @@ pub async fn put_todo(id: web::Path<i32>, update_dto: web::Json<PutTodoDTO>) -> 
 #[delete("{id}")]
 pub async fn delete_todo(id: web::Path<i32>) -> Result<String> {
     Ok(format!("Succes delete {} record!", 
-        delete(id.into_inner())
+        todo_service::remove_one(id.into_inner())
     ))
 }

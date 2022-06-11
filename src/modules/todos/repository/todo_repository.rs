@@ -31,14 +31,15 @@ pub fn save(todo: PutTodo) -> TodoList {
 }
 
 pub fn update(todo: TodoList) -> TodoList {
-    use crate::schema::todos:: dsl::*;
+    // use crate::schema::todos:: dsl::*;
 
     let conn = establish_connection();
 
-    diesel::update(todos.find(todo.id))
-        .set(&todo)
-        .get_result(&conn)
-        .expect("Error updating Todos")
+    todo.save_changes::<TodoList>(&conn).expect("Error updating Todos")
+    // diesel::update(todos.find(todo.id))
+    //     .set(&todo)
+    //     .get_result(&conn)
+    //     .expect("Error updating Todos")
 }
 
 pub fn delete(target_id: i32) -> usize {
