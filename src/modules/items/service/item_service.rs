@@ -4,10 +4,29 @@ use super::super::repository::item_repository;
 
 pub fn find_all() -> Vec<ItemDTO> {
 
-    let vec_items: Vec<Items> = item_repository::find_all();
-    vec_items
+    item_repository::find_all()
         .into_iter()
         .map(|items| ItemDTO::from(items))
+        .collect()
+
+}
+
+pub fn find(target_id: i32) -> ItemDTO {
+    ItemDTO::from(item_repository::find(target_id))
+}
+
+pub fn save(create_dto: Vec<CreateItemDTO>) -> Vec<ItemDTO> {
+
+    item_repository::save(
+        create_dto.into_iter().map(|i| {
+            CreateItems::from(i)
+        })
+        .collect()
+    )
+        .into_iter()
+        .map(|items| {
+            ItemDTO::from(items)
+        })
         .collect()
 
 }

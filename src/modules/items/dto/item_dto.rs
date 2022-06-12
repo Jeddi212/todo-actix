@@ -10,6 +10,12 @@ pub struct ItemDTO {
     pub list_id: i32
 }
 
+#[derive(Serialize, Deserialize)]
+pub struct CreateItemDTO {
+    pub title: String,
+    pub list_id: i32
+}
+
 impl From<Items> for ItemDTO {
     fn from(i: Items) -> Self {
         Self {

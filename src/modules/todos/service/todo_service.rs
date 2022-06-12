@@ -13,7 +13,7 @@ pub fn find(target_id: i32) -> TodoList {
 }
 
 pub fn save(dto: PutTodoDTO) -> TodoList {
-    todo_repository::save(PutTodo::from(dto))
+    todo_repository::save(CreateTodo::from(dto))
 }
 
 pub fn update(target_id: i32, dto: PutTodoDTO) -> TodoList {

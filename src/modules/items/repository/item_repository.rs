@@ -12,17 +12,28 @@ pub fn find_all() -> Vec<Items> {
         .expect("Error loading items")
 }
 
-// pub fn save() -> Vec<Items> {
-//     use crate::schema::items;
+pub fn find(target_id: i32) -> Items {
+    use crate::schema::items:: dsl::*;  
 
-//     let conn = establish_connection();
+    let connection = establish_connection();
+    items.find(target_id).get_result(&connection).expect("Items not found")
+}
 
-//     let new_todo = PutTodoDTO {
-//         title: title.to_string()
-//     };
+pub fn save(items: Vec<CreateItems>) -> Vec<Items> {
+    use crate::schema::items;
 
-//     diesel::insert_into(todos::table)
-//         .values(&new_todo)
-//         .get_result(&conn)
-//         .expect("Error saving new todo")
-// }
+    let conn = establish_connection();
+
+    let x = conn.build_transaction()
+        .read_write()
+        .run::<_, diesel::result::Error, _>(|| {
+            let result = diesel::insert_into(items::table)
+                .values(&items)
+                .load(&conn)
+                .expect("Error saving new items");
+            Ok(result)
+        });
+    
+    x.expect("Failed to save new items")
+
+}

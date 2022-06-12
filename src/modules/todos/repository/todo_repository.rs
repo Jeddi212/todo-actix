@@ -19,7 +19,7 @@ pub fn find(target_id: i32) -> TodoList {
     todos.find(target_id).get_result(&connection).expect("Todos not found")
 }
 
-pub fn save(todo: PutTodo) -> TodoList {
+pub fn save(todo: CreateTodo) -> TodoList {
     use crate::schema::todos;
 
     let conn = establish_connection();

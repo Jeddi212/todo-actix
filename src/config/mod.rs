@@ -18,5 +18,7 @@ pub fn item_config(cfg: &mut web::ServiceConfig) {
     cfg.service(
         web::scope("/item")
                 .service(get_item)
+                .service(get_item_by_id)
+                .service(post_item)
     );
 }

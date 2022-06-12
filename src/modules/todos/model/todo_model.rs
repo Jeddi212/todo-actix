@@ -20,11 +20,11 @@ pub struct TodoList {
 
 #[derive(Insertable)]
 #[table_name="todos"]
-pub struct PutTodo {
+pub struct CreateTodo {
     pub title: String
 }
 
-impl From<PutTodoDTO> for PutTodo {
+impl From<PutTodoDTO> for CreateTodo {
     fn from(p: PutTodoDTO) -> Self {
         Self {
             title: p.title

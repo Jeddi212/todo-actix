@@ -7,8 +7,8 @@ pub struct PutTodoDTO {
     pub title: String
 }
 
-impl From<PutTodo> for PutTodoDTO {
-    fn from(p: PutTodo) -> Self {
+impl From<CreateTodo> for PutTodoDTO {
+    fn from(p: CreateTodo) -> Self {
         Self {
             title: p.title
         }
