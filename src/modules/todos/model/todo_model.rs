@@ -2,7 +2,7 @@ use serde::{Serialize, Deserialize};
 use diesel::Queryable;
 
 use crate::schema::todos;
-use super::super::dto::todo_dto::PutTodoDTO;
+use super::super::dto::todo_dto::*;
 
 #[derive(Serialize)]
 pub struct Status {
@@ -13,7 +13,7 @@ pub struct Status {
 #[derive(Queryable, Insertable)]
 #[derive(AsChangeset, Identifiable)]
 #[table_name="todos"]
-pub struct TodoList {
+pub struct Todos {
     pub id: i32,
     pub title: String
 }
@@ -22,6 +22,15 @@ pub struct TodoList {
 #[table_name="todos"]
 pub struct CreateTodo {
     pub title: String
+}
+
+impl From<TodoDTO> for Todos {
+    fn from(t: TodoDTO) -> Self {
+        Self {
+            id: t.id,
+            title: t.title
+        }
+    }
 }
 
 impl From<PutTodoDTO> for CreateTodo {
