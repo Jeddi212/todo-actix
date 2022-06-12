@@ -31,13 +31,13 @@ pub fn save(create_dto: Vec<CreateItemDTO>) -> Vec<ItemDTO> {
 
 }
 
-pub fn update(target_id: i32, update_dto: PutItemDTO) -> Items {
+pub fn update(target_id: i32, update_dto: PutItemDTO) -> ItemDTO {
 
     let mut item: Items = item_repository::find(target_id);
 
     item.apply_update(update_dto);
     
-    item_repository::update(item)
+    ItemDTO::from(item_repository::update(item))
 
 }
 
