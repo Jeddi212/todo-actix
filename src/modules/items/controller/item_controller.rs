@@ -24,10 +24,13 @@ pub async fn post_item(create_dto: web::Json<Vec<CreateItemDTO>>) -> Result<impl
     Ok(serde_json::to_string(&item_service::save(create_dto.into_inner()))?)
 }
 
-// #[put("{id}")]
-// pub async fn put_item(id: web::Path<i32>, update_dto: web::Json<PutItemDTO>) -> Result<String> {
-//     Ok(serde_json::to_string(&update(id.into_inner(), &update_dto.title))?)
-// }
+#[put("{id}")]
+pub async fn put_item(target_id: web::Path<i32>, update_dto: web::Json<PutItemDTO>) -> Result<String> {
+    Ok(serde_json::to_string(&item_service::update(
+        target_id.into_inner(), 
+        update_dto.into_inner()
+    ))?)
+}
 
 // #[delete("{id}")]
 // pub async fn delete_item(id: web::Path<i32>) -> Result<String> {

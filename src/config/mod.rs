@@ -20,5 +20,6 @@ pub fn item_config(cfg: &mut web::ServiceConfig) {
                 .service(get_item)
                 .service(get_item_by_id)
                 .service(post_item)
+                .service(put_item)
     );
 }

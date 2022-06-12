@@ -33,6 +33,13 @@ impl From<ItemDTO> for Items {
     }
 }
 
+impl Items {
+    pub fn apply_update(&mut self, dto: PutItemDTO) {
+        self.title = dto.title;
+        self.checked = dto.checked;
+    }
+}
+
 impl From<CreateItemDTO> for CreateItems {
     fn from(i: CreateItemDTO) -> Self {
         Self {

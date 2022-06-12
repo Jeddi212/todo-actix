@@ -37,3 +37,14 @@ pub fn save(items: Vec<CreateItems>) -> Vec<Items> {
     x.expect("Failed to save new items")
 
 }
+
+pub fn update(item: Items) -> Items {
+    // use crate::schema::items:: dsl::*;
+    let conn = establish_connection();
+
+    item.save_changes::<Items>(&conn).expect("Error updating Item")
+    // diesel::update(items.find(item.id))
+    //     .set(&item)
+    //     .get_result(&conn)
+    //     .expect("Error updating Items")
+}
