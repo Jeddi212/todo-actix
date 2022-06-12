@@ -40,3 +40,9 @@ pub fn update(target_id: i32, update_dto: PutItemDTO) -> Items {
     item_repository::update(item)
 
 }
+
+pub fn remove_one(target_id: i32) -> usize {
+
+    item_repository::delete(target_id)
+
+}

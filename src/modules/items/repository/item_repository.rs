@@ -48,3 +48,11 @@ pub fn update(item: Items) -> Items {
     //     .get_result(&conn)
     //     .expect("Error updating Items")
 }
+
+pub fn delete(target_id: i32) -> usize {
+    use crate::schema::items:: dsl::*;
+
+    let conn = establish_connection();
+
+    diesel::delete(items.filter(id.eq(target_id))).execute(&conn).expect("Error delete item")
+}

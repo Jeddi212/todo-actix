@@ -32,9 +32,9 @@ pub async fn put_item(target_id: web::Path<i32>, update_dto: web::Json<PutItemDT
     ))?)
 }
 
-// #[delete("{id}")]
-// pub async fn delete_item(id: web::Path<i32>) -> Result<String> {
-//     Ok(format!("Succes delete {} record!", 
-//         delete(id.into_inner())
-//     ))
-// }
+#[delete("{id}")]
+pub async fn delete_item(target_id: web::Path<i32>) -> Result<String> {
+    Ok(format!("Succes delete {} record!", 
+        item_service::remove_one(target_id.into_inner())
+    ))
+}
