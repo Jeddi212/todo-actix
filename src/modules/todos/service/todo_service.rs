@@ -8,6 +8,10 @@ pub fn find_all() -> Vec<TodoList> {
     todo_repository::find_all()
 }
 
+pub fn find(target_id: i32) -> TodoList {
+    todo_repository::find(target_id)
+}
+
 pub fn save(dto: PutTodoDTO) -> TodoList {
     todo_repository::save(PutTodo::from(dto))
 }

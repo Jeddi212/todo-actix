@@ -2,7 +2,6 @@ use actix_web::{get, post, put, delete, web, HttpResponse, Responder, Result};
 
 use super::super::model::todo_model::*;
 use super::super::dto::todo_dto::*;
-use crate::modules::todos::repository::todo_repository;
 use crate::modules::todos::service::todo_service;
 
 #[get("/")]
@@ -27,7 +26,7 @@ pub async fn get_todo() -> impl Responder {
 pub async fn get_todo_by_id(id: web::Path<i32>) -> impl Responder {
     HttpResponse::Ok()
         .json(
-            todo_repository::find(id.into_inner())
+            todo_service::find(id.into_inner())
         )
 }
 
