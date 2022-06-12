@@ -4,6 +4,10 @@ use super::super::dto::todo_dto::*;
 use super::super::model::todo_model::*;
 use super::super::repository::todo_repository;
 
+pub fn find_all() -> Vec<TodoList> {
+    todo_repository::find_all()
+}
+
 pub fn save(dto: PutTodoDTO) -> TodoList {
     todo_repository::save(PutTodo::from(dto))
 }
